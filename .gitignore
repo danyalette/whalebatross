@@ -5,3 +5,4 @@ __pycache__venv
 node_modules
 settings_local.*
 webpack-stats.json
+*.sqlite3

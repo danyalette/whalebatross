@@ -73,7 +73,7 @@ and populate your database:
 
     upstream django {
         # server 127.0.0.1:8001; # for a web port socket
-        server unix:///var/www/mungobungo/html/mungobungo/mungobungo.sock; # for a file socket
+        server unix:///var/www/mungobungo/html/mungobungo.sock; # for a file socket
     }
 
     server {
@@ -90,7 +90,7 @@ and populate your database:
     	}
     	location / {
     			uwsgi_pass  django;
-    			include     /var/www/mungobungo/html/mungobungo/uwsgi_params; # the uwsgi_params file you installed
+    			include     /var/www/mungobungo/html/uwsgi_params; # the uwsgi_params file you installed
     	}
     }
 
@@ -117,7 +117,7 @@ and a `uwsgi_params` file (in the location specific in the nginx config file): (
 
 and a uwsgi ini file:
 
-    # /var/www/mungobungo/html/mungobungo/mungobungo_uwsgi.ini file ()
+    # /var/www/mungobungo/html/mungobungo_uwsgi.ini file ()
     #
     # on the command line, in the project dir (where settings.py is) you might do
     # uwsgi --socket mungobungo.sock --module mungobungo.wsgi --chmod-socket=666
@@ -125,7 +125,7 @@ and a uwsgi ini file:
     [uwsgi]
 
     # Django-related settings
-    # the base directory (full path) (this is the dir that setting.py is in)
+    # the base directory (full path) (this is the dir that manage.py is in)
     chdir           = /var/www/mungobungo/html/mungobungo
     # Django's wsgi file
     module          = mungobungo.wsgi
@@ -138,7 +138,7 @@ and a uwsgi ini file:
     # maximum number of worker processes
     processes       = 10
     # the socket (use the full path to be safe
-    socket          = /var/www/mungobungo/html/mungobungo/mungobungo.sock
+    socket          = /var/www/mungobungo/html/mungobungo.sock
     # ... with appropriate permissions - may be needed
     chmod-socket    = 666
     # clear environment on exit
@@ -160,7 +160,7 @@ and a uwsgi ini file:
     sudo mkdir /etc/uwsgi
     sudo mkdir /etc/uwsgi/vassals
     # symlink from the default config directory to your config file
-    sudo ln -s /var/www/mungobungo/html/mungobungo/mungobungo_uwsgi.ini /etc/uwsgi/vassals/
+    sudo ln -s /var/www/mungobungo/html/mungobungo_uwsgi.ini /etc/uwsgi/vassals/
     # run the emperor
     uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
 
@@ -173,7 +173,7 @@ and then run it:
 
 - remove debug line from `settings.py`
 
-- get start using webpack and react (in the dir where the manage.py file is):
+- get start using webpack and react (in the dir where the manage.py file is, wiht venv on):
 (source: http://owaislone.org/blog/webpack-plus-reactjs-and-django/, with addition for es6 and sass)
 
 `npm init`
@@ -203,10 +203,12 @@ index.jsx
     import React from 'react';
     import { render } from 'react-dom';
     import App from './app';
+    import './style.scss';
 
     render((
       <App/>
     ), document.getElementById('react-app'))
+
 
 
 and here's your webpack file
@@ -297,3 +299,17 @@ add to `templates/index.html`:
 
 at this stage, you will have to do a collectstatic every time you rebuild the bundle using webpack.
 
+- create rest api (with venv on):
+`pip install djangorestframework`
+and add settins:
+    INSTALLED_APPS = (
+        ...
+        'rest_framework',
+    )
+
+    REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAdminUser',
+        ],
+        'PAGE_SIZE': 10
+    }

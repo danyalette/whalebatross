@@ -1,0 +1,7 @@
+venv
+*.DS_Store
+*.pyc
+__pycache__venv
+node_modules
+settings_local.*
+webpack-stats.json

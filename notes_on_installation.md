@@ -2,6 +2,9 @@ NOTE: This is not a comprehensive instructional - just some rough notes I made d
 
 (assuming you're on ubuntu)
 
+helpful instructions on django + nginx:
+https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
+
 - make project folder and enter it
 `mkdir /var/www/mungobungo/html`
 `cd /var/www/mungobungo/html`

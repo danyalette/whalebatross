@@ -25,10 +25,10 @@ class PostSerializer(serializers.ModelSerializer):
         view_name='post-detail',
         lookup_field='slug'
     )
-
     class Meta:
         model = Post
         fields = ('url', 'title', 'slug', 'author', 'body', 'excerpt', 'status', 'allow_comments', 'categories', 'publish', 'created', 'modified')
+        partial = True
 
 class CategorySerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(

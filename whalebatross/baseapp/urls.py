@@ -7,12 +7,13 @@ router.register(r'posts', views.PostsViewSet)
 router.register(r'categories', views.CategoriesViewSet)
 
 urlpatterns = [
-    url(r'^$', views.index),
     url(r'^api/', include(router.urls)),
     url(r'^auth/$',
         views.AuthView.as_view(),
         name='authenticate'),
     url(r'^user/current/$',
         views.CurrentUserView.as_view(),
-        name='current_user')
+        name='current_user'),
+    url(r'^$', views.index),
+    url(r'^posts/', views.index)
 ]

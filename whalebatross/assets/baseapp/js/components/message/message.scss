@@ -1,0 +1,46 @@
+@import "../../styles/variables/variables";
+
+.message {
+  overflow: hidden;
+  max-height: 0;
+  font-size: 14px;
+  transition: max-height 1s ease;
+
+  &.active {
+    max-height: 120px;
+  }
+
+  .message-content {
+    overflow: auto;
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    background-color: rgba(#999999, 0.2);
+    border: 1px solid #999999;
+  }
+
+  &.success {
+    .message-content {
+      background-color: rgba($success-color, 0.2);
+      border-color: $success-color;
+    }
+  }
+  &.fail {
+    .message-content {
+      background-color: rgba($fail-color, 0.2);
+      border-color: $fail-color;
+    }
+  }
+  &.warn {
+    .message-content {
+      background-color: rgba($warn-color, 0.2);
+      border-color: $warn-color;
+    }
+  }
+  &.info {
+    .message-content {
+      background-color: rgba($info-color, 0.2);
+      border-color: $info-color;
+    }
+  }
+}

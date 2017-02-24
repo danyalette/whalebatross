@@ -1,0 +1,30 @@
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+button {
+  outline: none;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 7px 10px;
+  font-size: 14px;
+  border: 1px solid $color1;
+}
+
+.form-row {
+  display: flex;
+}
+
+.form-row input {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  &:last-child {
+    margin-right: 0;
+  }
+  &[type="text"],
+  &[type="password"],
+  &[type="submit"] {
+    flex: 1;
+  }
+}

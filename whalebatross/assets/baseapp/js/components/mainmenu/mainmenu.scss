@@ -1,0 +1,14 @@
+@import "../../styles/variables/variables";
+
+.mainmenu {
+  color: #ffffff;
+  background: $color2;
+  box-shadow: 1px 0 2px rgba(0,0,0,0.1);
+}
+
+.mainmenu .item {
+  display: inline-block;
+  padding: 15px 25px;
+  cursor: pointer;
+  border-right: 1px solid rgba(255,255,255,0.4);
+}

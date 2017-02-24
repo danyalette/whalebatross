@@ -10,17 +10,33 @@ export function apiPut(url, data) {
   return http('PATCH', url, data, true);
 }
 
-function http(type, url, data, includeToken) {
+export function apiAuth(username, password) {
+  return http('POST', 'auth/', null, true,
+    "Basic " + btoa(username + ":" + password)
+  );
+}
+
+export function apiLogout(username, password) {
+  return http('DELETE', 'auth/', null, true);
+}
+
+export function fetchCurrentUser(username, password) {
+  return http('GET', 'user/current/', null, true);
+}
+
+function http(type, url, data, includeToken = true, authHeader) {
   var data = JSON.stringify(data);
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open(type, url, true);
     xhr.setRequestHeader('Content-type', 'application/json');
     if (includeToken) xhr.setRequestHeader('X-CSRFToken', document.querySelector('input[name=csrfmiddlewaretoken]').value);
+    if (authHeader) xhr.setRequestHeader("Authorization", authHeader);
     xhr.onreadystatechange = function (e) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-              resolve(JSON.parse(xhr.responseText))
+              if (xhr.responseText) resolve(JSON.parse(xhr.responseText))
+              else resolve();
             } else {
                reject(xhr.statusText);
             }

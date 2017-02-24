@@ -1,6 +1,7 @@
 import React from 'react';
 import { apiGet } from './utils';
 import TextEditor from './text-editor';
+import MainMenu from './components/mainmenu/mainmenu';
 
 export default class App  extends React.Component {
 
@@ -29,7 +30,7 @@ export default class App  extends React.Component {
             return (
               <div className='post' key={ post.slug }>
                 <h2> { post.title } </h2>
-                <div><i> { post.author.username } </i></div>
+                <div><i> { post.author? post.author.username : '' } </i></div>
                 <p className='post-content' dangerouslySetInnerHTML={{__html: post.body}}></p>
               </div>
             )
@@ -37,6 +38,7 @@ export default class App  extends React.Component {
     }
     return (
       <div>
+        <MainMenu />
         <h1>Whalebatross</h1>
         <div className='posts'> { posts } </div>
         <TextEditor onChange={ this.textEditorChange }/>

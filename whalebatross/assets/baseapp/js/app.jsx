@@ -2,6 +2,7 @@ import React from 'react';
 import { apiGet } from './utils';
 import TextEditor from './text-editor';
 import MainMenu from './components/mainmenu/mainmenu';
+import PostFeed from './components/postfeed/postfeed';
 
 export default class App  extends React.Component {
 
@@ -25,22 +26,11 @@ export default class App  extends React.Component {
   }
 
   render() {
-    if (this.state.posts) {
-        var posts = this.state.posts.map(function(post){
-            return (
-              <div className='post' key={ post.slug }>
-                <h2> { post.title } </h2>
-                <div><i> { post.author? post.author.username : '' } </i></div>
-                <p className='post-content' dangerouslySetInnerHTML={{__html: post.body}}></p>
-              </div>
-            )
-        });
-    }
     return (
       <div>
         <MainMenu />
         <h1>Whalebatross</h1>
-        <div className='posts'> { posts } </div>
+        <PostFeed posts={this.state.posts} />
         <TextEditor onChange={ this.textEditorChange }/>
       </div>
     );

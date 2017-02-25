@@ -1,5 +1,6 @@
 import React from 'react';
 import MainMenu from './components/mainmenu/mainmenu';
+import MainHeader from './components/mainheader/mainheader';
 
 export default class App  extends React.Component {
 
@@ -7,7 +8,7 @@ export default class App  extends React.Component {
     return (
       <div>
         <MainMenu />
-        <h1>Whalebatross</h1>
+        <MainHeader />
         {this.props.children}
       </div>
     );

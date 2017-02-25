@@ -1,5 +1,7 @@
 import React from 'react';
 import ProfileModal from '../profilemodal/profilemodal';
+import { Link } from 'react-router'
+
 import './mainmenu.scss';
 
 export default class MainMenu  extends React.Component {
@@ -29,6 +31,10 @@ export default class MainMenu  extends React.Component {
   render() {
     return (
       <div className="mainmenu">
+        <Link className='item logo mainmenu-logo' to='/'>
+          <img src="/static/baseapp/images/whalebatross-logo-invert.png" />
+          <div className='title mainmenu-title'>Whalebatross</div>
+        </Link>
         <div className="item" onClick={this.openProfileModal.bind(this)}>Login</div>
         <ProfileModal
           open={this.state.profileModalOpen}

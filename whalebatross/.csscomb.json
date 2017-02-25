@@ -42,6 +42,7 @@
         "-webkit-align-items",
         "-moz-align-items",
         "align-items",
+        "justify-content",
         "text-align",
         "vertical-align",
         "float",

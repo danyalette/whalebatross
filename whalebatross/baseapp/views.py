@@ -6,7 +6,11 @@ from django.contrib.auth import login, logout
 from . import permissions, authentication, serializers, models
 
 def index(request):
-    return render(request, 'index.html')
+    return render(
+        request,
+        'index.html',
+        {'site_settings': serializers.SiteSettingsSerializer(models.SiteSettings.objects.get()).data }
+    )
 
 class PostsViewSet(viewsets.ModelViewSet):
     queryset = models.Post.objects.all()
@@ -20,6 +24,10 @@ class CategoriesViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
     permission_classes = [permissions.IstaffOrNoMod]
 
+class SettingsViewSet(viewsets.ModelViewSet):
+    queryset = models.SiteSettings.objects.all()
+    serializer_class = serializers.SiteSettingsSerializer
+    permission_classes = [permissions.IstaffOrNoMod]
 
 class AuthView(views.APIView):
     authentication_classes = (authentication.QuietBasicAuthentication,)

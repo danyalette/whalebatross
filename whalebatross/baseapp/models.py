@@ -51,3 +51,25 @@ class Post(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.title
+
+class SingletonModel(models.Model):
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.__class__.objects.exclude(id=self.id).delete()
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        try:
+            return cls.objects.get()
+        except cls.DoesNotExist:
+            return cls()
+
+class SiteSettings(SingletonModel):
+    title = models.CharField(_('title'), max_length=200)
+    logo = models.ImageField(upload_to='sitesettings/logo/', max_length=255, null=True, blank=True)
+    class Meta:
+        verbose_name = _('site settings')
+        verbose_name_plural = _('site settings')

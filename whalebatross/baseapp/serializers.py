@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Post, Category
+from . import models
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class CategoryShortSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = Category
+        model = models.Category
         fields = ('url', 'title')
 
 class PostSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
         lookup_field='slug'
     )
     class Meta:
-        model = Post
+        model = models.Post
         fields = ('url', 'title', 'slug', 'author', 'body', 'excerpt', 'status', 'allow_comments', 'categories', 'publish', 'created', 'modified')
         partial = True
 
@@ -38,5 +38,12 @@ class CategorySerializer(serializers.ModelSerializer):
     posts = PostSerializer(source='post_set', many=True, read_only=True)
 
     class Meta:
-        model = Category
+        model = models.Category
         fields = ('url', 'title', 'slug', 'posts')
+
+class SiteSettingsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.SiteSettings
+        fields = ('title', 'logo')
+

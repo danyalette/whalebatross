@@ -2,8 +2,13 @@ button,
 input[type="submit"] {
   padding: 10px;
   font-size: 14px;
-  color: #ffffff;
-  background-color: $color2;
-  border: none;
-  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  color: $dark-text;
+  background: none;
+  border: 1px solid $dark-text;
+  border-radius: 1px;
+  &:hover {
+    background: rgba($dark-text, 0.1);
+  }
 }

@@ -4,7 +4,7 @@ body {
   font-size: 16px;
   font-family: sans-serif;
   color: $dark-text;
-  background: rgba($color3, 0.1);
+  background: #f5f5f5;
 }
 
 * {
@@ -19,4 +19,8 @@ a {
 
 .title {
   font-family: Lato, Helvetica, sans-serif;
+}
+
+.noselect {
+  user-select: none;
 }

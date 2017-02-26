@@ -14,9 +14,23 @@ export default class LoginForm  extends React.Component {
   }
 
   onFieldChange() {
+    this.resetFormState();
+  }
+
+  resetFormState() {
     this.setState({
       formState: null
-    })
+    });
+  }
+
+  setFormState(state) {
+    var self = this;
+    self.setState({
+      formState: state
+    });
+    setTimeout(function(){
+      self.resetFormState();
+    }, 2000);
   }
 
   handleFormSubmit(e) {
@@ -27,14 +41,10 @@ export default class LoginForm  extends React.Component {
       e.target.elements['password'].value
     ).then(function(data){
       if (self.props.onLoggedIn) self.props.onLoggedIn();
-      self.setState({
-        formState: 'success'
-      });
+      self.setFormState('success');
     }).catch(function(data){
       if (self.props.onLoggedInFail) self.props.onLoggedInFail();
-      self.setState({
-        formState: 'fail'
-      });
+      self.setFormState('fail');
     });
   }
 

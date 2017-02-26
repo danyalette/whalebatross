@@ -9,11 +9,16 @@
 }
 
 .mainmenu .item {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 15px 25px;
   cursor: pointer;
-  border-right: 1px solid rgba(255,255,255,0.4);
+  border-right: 1px solid rgba(255,255,255,0.4); 
+}
+
+.mainmenu .item.item-right {
+  margin-left: auto;
 }
 
 .mainmenu-logo,

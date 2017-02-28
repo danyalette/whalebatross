@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { logInUser } from 'actions/actions';
 import { apiAuth } from 'utils.js';
 import Message from '../message/message';
 import './loginform.scss';
 
-export default class LoginForm  extends React.Component {
+class LoginForm  extends React.Component {
 
   constructor(props) {
     super(props);
@@ -36,16 +38,18 @@ export default class LoginForm  extends React.Component {
   handleFormSubmit(e) {
     var self = this;
     e.preventDefault();
-    apiAuth(
+    self.props.dispatch(logInUser(
       e.target.elements['email'].value,
       e.target.elements['password'].value
-    ).then(function(data){
-      if (self.props.onLoggedIn) self.props.onLoggedIn();
-      self.setFormState('success');
-    }).catch(function(data){
-      if (self.props.onLoggedInFail) self.props.onLoggedInFail();
-      self.setFormState('fail');
-    });
+    ))
+      .then(() => {
+        if (self.props.onLoggedIn) self.props.onLoggedIn();
+        self.setFormState('success');
+      })
+      .catch(() => {
+        if (self.props.onLoggedInFail) self.props.onLoggedInFail();
+        self.setFormState('fail');
+      })
   }
 
   render() {
@@ -68,3 +72,7 @@ export default class LoginForm  extends React.Component {
     );
   }
 }
+
+LoginForm = connect()(LoginForm);
+
+export default LoginForm;

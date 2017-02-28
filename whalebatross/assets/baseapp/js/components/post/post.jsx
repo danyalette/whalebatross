@@ -1,25 +1,18 @@
 import React from 'react';
-import { apiGet } from 'utils';
+import { connect } from 'react-redux';
+import { getPost } from 'actions/posts';
 
-export default class PostExcerpt extends React.Component {
+class Post extends React.Component {
 
   constructor(props) {
     super(props);
 
     var self = this;
-
-    this.state = {
-      'post': null
-    };
-    apiGet('/api/posts/' + this.props.params.slug).then(function(data){
-      self.setState({
-        post: data
-      });
-    });
+    this.props.dispatch(getPost(this.props.params.slug));
   }
 
   render(){
-    var post = this.state.post;
+    var post = this.props.posts.data.filter(post => { return post.slug == this.props.params.slug })[0];
     return post? (<div className='post' key={ post.slug }>
       <h2> { post.title } </h2>
       <div><i> { post.author? post.author.username : '' } </i></div>
@@ -27,3 +20,10 @@ export default class PostExcerpt extends React.Component {
     </div>): null;
   }
 }
+
+Post = connect(
+  state => {
+   return { posts: state.posts }
+ }
+)(Post);
+export default Post;

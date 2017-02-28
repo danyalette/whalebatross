@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPosts } from 'actions/posts';
 import PostExcerpt from '../postexcerpt/postexcerpt';
-import { apiGet } from 'utils';
 import './postfeed.scss';
 
 class PostFeed extends React.Component {
@@ -13,14 +12,17 @@ class PostFeed extends React.Component {
   }
 
   render() {
-    var posts = this.props.posts.data?
-    this.props.posts.data.map(function(post){
-        return (
-          <PostExcerpt key={ post.slug } post={ post }/>
-        )
-    }) : null;
+    const postData = this.props.posts && this.props.posts.data? this.props.posts.data : [];
+    postData.sort(function(a, b) {
+      return (
+        new Date(a.publish).getTime() < new Date(b.publish).getTime()
+      ) ? 1 : -1;
+    });
+
     return (
-      <div className='posts'> { posts } </div>
+      <div className='posts'>
+        {postData.map((post) => <PostExcerpt key={ post.slug } post={ post }/>)}
+      </div>
     );
   }
 }

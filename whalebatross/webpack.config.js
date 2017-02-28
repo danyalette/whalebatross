@@ -24,7 +24,11 @@ module.exports = {
           loader: "babel",
           query:
             {
-              presets:['es2015', 'react']
+              presets:['es2015', 'es2016', 'es2017', 'react'],
+              "plugins": [
+                "syntax-async-functions",
+                "transform-object-rest-spread"
+              ]
             }
       },
       {

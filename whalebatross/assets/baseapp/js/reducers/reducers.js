@@ -8,14 +8,16 @@ function user(state = {
 }, action) {
   switch (action.type) {
     case REQUEST_LOGIN:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      })
+      }
     case RECEIVE_USER:
-      return Object.assign({}, state, action.user, {
+      return {
+        ...state,
         isFetching: false,
-        user: action.user
-      })
+        data: action.user
+      }
     default:
       return state
   }
@@ -25,9 +27,10 @@ function currentUser(state = { }, action) {
   switch (action.type) {
     case REQUEST_LOGIN:
     case RECEIVE_USER:
-      return Object.assign({}, state,
-        user(state[action.currentUser], action)
-      )
+      return {
+        ...state,
+        ...user(state[action.currentUser], action)
+      }
     default:
       return state
   }

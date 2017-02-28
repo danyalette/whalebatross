@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { logInUser } from 'actions/actions';
-import { apiAuth } from 'utils.js';
+import { connect } from 'react-redux';
+import { logInUser } from 'actions/user';
 import Message from '../message/message';
 import './loginform.scss';
 

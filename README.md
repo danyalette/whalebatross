@@ -33,12 +33,9 @@ enter the django project directory (containing the file `manage.py`):
 ### build the js bundle:
     $ npm install
     $ ./node_modules/.bin/webpack --config webpack.config.js
-    $ ./manage.py collectstatic
 
-For development, you may wish to use webpack's watcher. In order to avoid having to do collectstatic every time, create a symlink.
+For development, you may wish to use webpack's watcher.
 
-    $ rm -R static/baseapp
-    $ ln -s assets/baseapp static/baseapp
     $ ./node_modules/.bin/webpack --config webpack.config.js --watch
 
 ### run a development server:

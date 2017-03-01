@@ -3,10 +3,11 @@ import ProfileModal from '../profilemodal/profilemodal';
 import CreatePostModal from '../createpostmodal/createpostmodal';
 import Hamburger from 'components/hamburger/hamburger';
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
 
 import './mainmenu.scss';
 
-export default class MainMenu  extends React.Component {
+class MainMenu  extends React.Component {
 
   constructor(props) {
     super(props);
@@ -58,8 +59,8 @@ export default class MainMenu  extends React.Component {
     return (
       <div className='mainmenu'>
         <Link className='item logo mainmenu-logo' to='/'>
-          <img src='/static/baseapp/images/whalebatross-logo-invert.png' />
-          <div className='title mainmenu-title'>Whalebatross</div>
+          <img src={ this.props.settings.logo } />
+          <div className='title mainmenu-title'>{ this.props.settings.title }</div>
         </Link>
         <div className='item item-right' onClick={this.toggleHamburgerMenu.bind(this)}>
           <Hamburger open={this.state.hamburgerMenuOpen}>
@@ -79,3 +80,8 @@ export default class MainMenu  extends React.Component {
     );
   }
 }
+
+MainMenu = connect(
+  (state) => { return { settings: state.siteSettings }}
+)(MainMenu);
+export default MainMenu;

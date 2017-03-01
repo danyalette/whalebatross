@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileModal from '../profilemodal/profilemodal';
+import CreatePostModal from '../createpostmodal/createpostmodal';
 import Hamburger from 'components/hamburger/hamburger';
 import { Link } from 'react-router'
 
@@ -14,6 +15,7 @@ export default class MainMenu  extends React.Component {
 
     this.state = {
       profileModalOpen: false,
+      createPostModalOpen: false,
       hamburgerMenuOpen: false
     };
   }
@@ -27,6 +29,18 @@ export default class MainMenu  extends React.Component {
   closeProfileModal() {
     this.setState({
       profileModalOpen: false
+    })
+  }
+
+  openCreatePostModal(e) {
+    this.setState({
+      createPostModalOpen: true
+    })
+  }
+
+  closeCreatePostModal() {
+    this.setState({
+      createPostModalOpen: false
     })
   }
 
@@ -54,7 +68,11 @@ export default class MainMenu  extends React.Component {
               <ProfileModal
                 open={this.state.profileModalOpen}
                 onCloseClick={this.closeProfileModal.bind(this)}/>
-              </div>
+              <div onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
+              <CreatePostModal
+                open={this.state.createPostModalOpen}
+                onCloseClick={this.closeCreatePostModal.bind(this)}/>
+            </div>
           </Hamburger>
         </div>
       </div>

@@ -34,7 +34,7 @@ function http(type, url, data, includeToken = true, authHeader) {
     if (authHeader) xhr.setRequestHeader("Authorization", authHeader);
     xhr.onreadystatechange = function (e) {
         if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
+            if ([200, 201].includes(xhr.status)) {
               if (xhr.responseText) resolve(JSON.parse(xhr.responseText))
               else resolve();
             } else {

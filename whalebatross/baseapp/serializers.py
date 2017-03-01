@@ -13,14 +13,13 @@ class CategoryShortSerializer(serializers.ModelSerializer):
         view_name='category-detail',
         lookup_field='slug'
     )
-
     class Meta:
         model = models.Category
         fields = ('url', 'title')
 
 class PostSerializer(serializers.ModelSerializer):
     categories = CategoryShortSerializer(many=True, read_only=True)
-    author = UserSerializer(read_only=True)
+    author = UserSerializer(read_only=True, default=serializers.CurrentUserDefault())
     url = serializers.HyperlinkedIdentityField(
         view_name='post-detail',
         lookup_field='slug'

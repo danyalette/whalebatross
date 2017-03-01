@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
 from tinymce.models import HTMLField
+from django.utils import timezone
 
 # Create your models here.
 
@@ -37,7 +38,7 @@ class Post(models.Model):
     excerpt = models.TextField(_('excerpt'), blank=True, help_text=_('Concise text suggested.'))
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=2)
     allow_comments = models.BooleanField(_('allow comments'), default=True)
-    publish = models.DateTimeField(_('publish'), default=datetime.datetime.now)
+    publish = models.DateTimeField(_('publish'), default=lambda: timezone.localtime(timezone.now()))
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     categories = models.ManyToManyField(Category, blank=True)

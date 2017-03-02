@@ -1,9 +1,9 @@
 .mainheader {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   box-sizing: content-box;
-  height: 60px;
   padding: 50px 20px;
 }
 
@@ -11,6 +11,10 @@
 .mainheader-title {
   display: inline-block;
   height: 100%;
+}
+
+.mainheader-logo {
+  height: 100px;
 }
 
 .mainheader-logo img {
@@ -24,6 +28,8 @@
   justify-content: center;
   vertical-align: baseline;
   margin-left: 20px;
-  font-weight: 300;
-  font-size: 25px;
+  font-size: 17px;
+  h1 {
+    font-weight: 300;
+  }
 }

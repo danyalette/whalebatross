@@ -1,0 +1,9 @@
+.createpostform .texteditor {
+  width: 100%;
+  margin: 20px 0;
+  border-color: #cccccc;
+  border-radius: 1px;
+  [contenteditable] {
+    height: 200px;
+  }
+}

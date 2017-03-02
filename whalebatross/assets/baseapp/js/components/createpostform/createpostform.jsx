@@ -59,7 +59,7 @@ class CreatePostForm  extends React.Component {
 
   render() {
     return (
-      <div className='loginform'>
+      <div className='createpostform'>
         <form onSubmit={this.handleFormSubmit.bind(this)}>
           <Message status='success' active={this.state.formState == 'success'}>Successful.</Message>
           <Message status='fail' active={this.state.formState == 'fail'}>Something went wrong.</Message>
@@ -81,6 +81,7 @@ class CreatePostForm  extends React.Component {
           </div>
           <div className='form-row'>
             <TextEditor
+              className='texteditor'
               ref={(input) => { this.formBodyInput = input; }}/>
           </div>
           <div className='form-row'>

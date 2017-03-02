@@ -22,6 +22,7 @@ export default class CreatePostModal  extends React.Component {
           open={this.props.open}
           onCloseClick={this.closeModal.bind(this)}
           header="Create Post"
+          size="large"
           content={<CreatePostForm />}/>
       </div>
     );

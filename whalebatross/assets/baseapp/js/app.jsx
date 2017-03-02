@@ -17,7 +17,9 @@ class App  extends React.Component {
         <div>
           <MainMenu />
           <MainHeader />
-          { this.props.children }
+          <div className='content'>
+            { this.props.children }
+          </div>
         </div>
       ) : null
     );

@@ -1,0 +1,13 @@
+@import "../../styles/variables/variables";
+
+.postfeed {
+  .navigation {
+    text-align: center;
+    margin: 80px auto;
+  }
+  .navigate {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid $light-border;
+  }
+}

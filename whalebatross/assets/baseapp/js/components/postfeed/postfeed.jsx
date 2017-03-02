@@ -20,16 +20,18 @@ class PostFeed extends React.Component {
     }
     const postsData = this.props.posts && this.props.posts[this.props.page]? this.props.posts[this.props.page] : { results: [] };
     return (
-      <div className='posts'>
+      <div className='postfeed'>
         {postsData.results.map((post) => <PostExcerpt key={ post.slug } post={ post }/>)}
-        { (postsData.previous)?
-          <Link to={ '/page/' + (parseInt(this.props.page) - 1) }> Previous Page </Link>
-          : null
-        }
-        { (postsData.next)?
-          <Link to={ '/page/' + (parseInt(this.props.page) + 1) }> Next Page </Link>
-          : null
-        }
+        <div className='navigation'>
+          { (postsData.previous)?
+            <Link className='navigate previous' to={ '/page/' + (parseInt(this.props.page) - 1) }> Previous Page </Link>
+            : null
+          }
+          { (postsData.next)?
+            <Link className='navigate next' to={ '/page/' + (parseInt(this.props.page) + 1) }> Next Page </Link>
+            : null
+          }
+        </div>
       </div>
     );
   }

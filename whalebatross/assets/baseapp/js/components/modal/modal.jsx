@@ -24,7 +24,7 @@ export default class Modal  extends React.Component {
     </div>) : '';
 
     return (
-      <div className={"modal" + (this.props.open? " open" : "")}>
+      <div className={"modal" + (this.props.open? " open" : "") + (this.props.size == 'large'? " large" : "")}>
         <div className="modal-background" onClick={this.props.onCloseClick}></div>
         <div className="modal-content">
           { header }

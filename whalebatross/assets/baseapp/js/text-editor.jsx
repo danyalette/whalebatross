@@ -24,6 +24,7 @@ export default class TextEditor extends React.Component {
   render () {
     return (
       <RichTextEditor
+        {...this.props}
         value={this.state.value}
         onChange={this.onChange.bind(this)}
       />

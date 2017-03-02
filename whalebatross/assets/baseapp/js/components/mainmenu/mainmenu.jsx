@@ -65,14 +65,18 @@ class MainMenu  extends React.Component {
         <div className='item item-right' onClick={this.toggleHamburgerMenu.bind(this)}>
           <Hamburger open={this.state.hamburgerMenuOpen}>
             <div onClick={this.stopPropagation}>
-              <div onClick={this.openProfileModal.bind(this)}>Login</div>
-              <ProfileModal
-                open={this.state.profileModalOpen}
-                onCloseClick={this.closeProfileModal.bind(this)}/>
-              <div onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
-              <CreatePostModal
-                open={this.state.createPostModalOpen}
-                onCloseClick={this.closeCreatePostModal.bind(this)}/>
+              <div className='item-submenu'>
+                <div onClick={this.openProfileModal.bind(this)}>Login</div>
+                <ProfileModal
+                  open={this.state.profileModalOpen}
+                  onCloseClick={this.closeProfileModal.bind(this)}/>
+              </div>
+              <div className='item-submenu'>
+                <div onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
+                <CreatePostModal
+                  open={this.state.createPostModalOpen}
+                  onCloseClick={this.closeCreatePostModal.bind(this)}/>
+              </div>
             </div>
           </Hamburger>
         </div>

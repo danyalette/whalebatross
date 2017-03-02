@@ -6,7 +6,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className='homepage'>
-        <PostFeed />
+        <PostFeed page={ this.props.params.page ? this.props.params.page : 1 }/>
       </div>
     );
   }

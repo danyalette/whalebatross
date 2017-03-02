@@ -12,7 +12,7 @@ class Post extends React.Component {
   }
 
   render(){
-    var post = this.props.posts.data.filter(post => { return post.slug == this.props.params.slug })[0];
+    var post = this.props.posts[this.props.params.slug];
     return post? (<div className='post' key={ post.slug }>
       <h2> { post.title } </h2>
       <div><i> { post.author? post.author.username : '' } </i></div>
@@ -23,7 +23,7 @@ class Post extends React.Component {
 
 Post = connect(
   state => {
-   return { posts: state.posts }
+   return { posts: state.posts.postDetails }
  }
 )(Post);
 export default Post;

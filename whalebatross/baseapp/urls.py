@@ -16,5 +16,6 @@ urlpatterns = [
         views.CurrentUserView.as_view(),
         name='current_user'),
     url(r'^$', views.index),
-    url(r'^posts/', views.index)
+    url(r'^posts/', views.index),
+    url(r'^page/', views.index)
 ]

@@ -16,6 +16,7 @@ render((
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home}/>
+        <Route path="page/:page" component={Home}/>
         <Route path="posts/:slug" component={Post}/>
       </Route>
     </Router>

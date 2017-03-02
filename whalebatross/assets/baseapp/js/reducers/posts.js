@@ -1,55 +1,63 @@
 import {
-  BEGIN_GET_POSTS_REQUEST, RECEIVE_POSTS,
-  BEGIN_GET_POST_REQUEST, RECEIVE_POST
+  RECEIVE_POSTS,
+  RECEIVE_POST
 } from 'actions/posts'
 
 const INITIAL_POSTS_STATE = {
-  isFetching: false,
-  data: []
+  postsList: {},
+  postDetails: {}
 }
-
-const INITIAL_POST_STATE = {
-  isFetching: false
-}
+const INITIAL_POSTS_LIST_STATE = {}
+const INITIAL_POST_DETAILS_STATE = {}
 
 function sortByPublish(data){
-  return data.slice(0).sort(function(a, b) {
-    return (
-      new Date(a.publish).getTime() < new Date(b.publish).getTime()
-    ) ? 1 : -1;
-  });
+  if (data)
+    return data.slice(0).sort(function(a, b) {
+      return (
+        new Date(a.publish).getTime() < new Date(b.publish).getTime()
+      ) ? 1 : -1;
+    });
+  return data;
 }
 
-
-function postsReducer(action) {
+function postsList(state = INITIAL_POSTS_LIST_STATE, action) {
   switch (action.type) {
-    case BEGIN_GET_POSTS_REQUEST:
-      return {
-        isFetching: true
-      }
     case RECEIVE_POSTS:
       return {
-        isFetching: false,
-        data: sortByPublish(action.posts)
+        ...state,
+        [action.page]: {
+          ...action.posts,
+          ['results']: sortByPublish(action.posts.results)
+        }
       }
     default:
       return state
   }
 }
 
-function postReducer(state = INITIAL_POST_STATE, action) {
+function postDetails(state = INITIAL_POST_DETAILS_STATE, action) {
   switch (action.type) {
-    case BEGIN_GET_POST_REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-        slug: action.slug
-      }
+    /* post details get updated with info from posts list */
+    case RECEIVE_POSTS:
+      let postsObject = action.posts.results.reduce((a, post) => {
+        postsObject = {
+          ...postsObject,
+          [post.slug]: {
+            ...state[post.slug],
+            ...post,
+            ['page']: action.page
+          }
+        }
+        return postsObject;
+      });
+      return { ...state, ...postsObject }
     case RECEIVE_POST:
       return {
         ...state,
-        isFetching: false,
-        ...action.post
+        [action.post.slug]: {
+          ...state[action.post.slug],
+          ...action.post
+        }
       }
     default:
       return state
@@ -59,25 +67,16 @@ function postReducer(state = INITIAL_POST_STATE, action) {
 export function posts(state = INITIAL_POSTS_STATE, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
-    case BEGIN_GET_POSTS_REQUEST:
       return {
         ...state,
-        ...postsReducer(action)
+        postsList: postsList(state.postsList, action),
+        postDetails: postDetails(state.postDetails, action)
       }
-    case BEGIN_GET_POST_REQUEST:
-    case RECEIVE_POST:
-      const index = state.data.findIndex(item => item.slug === action.slug);
-      let data = state.data.slice(0);
-      if (index < 0) data = data.concat([ postReducer(null, action) ]);
-      else data = [
-        ...state.data.slice(0, index),
-        postReducer(state.data[index], action),
-        ...state.data.slice(index + 1)
-      ]
-      return {
-        ...state,
-        data: sortByPublish(data)
-      }
+      case RECEIVE_POST:
+        return {
+          ...state,
+          postDetails: postDetails(state.postDetails, action)
+        }
     default:
       return state
   }

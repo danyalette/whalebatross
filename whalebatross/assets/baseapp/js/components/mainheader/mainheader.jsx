@@ -8,7 +8,7 @@ class MainHeader extends React.Component {
   render() {
     return (
       <Link to='/'>
-        <div className='mainheader'>
+        <div className='mainheader noselect'>
           <div className='logo mainheader-logo'>
             <img src={ this.props.settings.logo } />
           </div>

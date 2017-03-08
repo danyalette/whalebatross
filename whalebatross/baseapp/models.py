@@ -7,6 +7,7 @@ from django.conf import settings
 from django.db import models
 from tinymce.models import HTMLField
 from django.utils import timezone
+import re
 
 # Create your models here.
 
@@ -52,6 +53,12 @@ class Post(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.title
+
+    def save(self, *args, **kwargs):
+        if not getattr(self, 'excerpt'):
+            s = re.compile('<!-- more -->.*', re.DOTALL)
+            self.excerpt = re.sub(s, '', self.body)
+        super(Post, self).save(*args, **kwargs)
 
 class SingletonModel(models.Model):
     class Meta:

@@ -57,7 +57,7 @@ class MainMenu  extends React.Component {
 
   render() {
     return (
-      <div className='mainmenu'>
+      <div className='mainmenu noselect'>
         <Link className='item logo mainmenu-logo' to='/'>
           <img src={ this.props.settings.logo } />
           <div className='title mainmenu-title'>{ this.props.settings.title }</div>

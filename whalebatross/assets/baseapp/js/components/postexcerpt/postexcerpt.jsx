@@ -10,7 +10,7 @@ export default class PostExcerpt extends React.Component {
       <div className='postexcerpt'>
         <h2> { post.title } </h2>
         <div><i> { post.author? post.author.username : '' } </i></div>
-        <p className='post-content' dangerouslySetInnerHTML={{__html: post.body}}></p>
+        <p className='post-content' dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
       </div>
     </Link>);
   }

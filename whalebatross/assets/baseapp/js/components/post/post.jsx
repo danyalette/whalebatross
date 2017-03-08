@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPost } from 'actions/posts';
 
+import './post.scss';
+
 class Post extends React.Component {
 
   constructor(props) {

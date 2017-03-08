@@ -1,0 +1,17 @@
+@import "../../styles/variables/variables";
+
+.post {
+  padding: 40px 0;
+}
+
+.post h2 {
+  padding-bottom: 10px;
+  font-size: 42px;
+  border-bottom: 2px solid $dark-text;
+}
+
+.post p {
+  font-size: 19px;
+  font-family: "Lora", serif;
+  line-height: 1.6;
+}

@@ -16,9 +16,13 @@
 
 .mainmenu .item-submenu {
   padding: 15px;
-  border-bottom: 1px solid $light-border;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 2px solid $dark-text;
+  border-left: 2px solid $dark-text;
   &:first-child {
-    border-top: 1px solid $light-border;
+    border-top: 2px solid $dark-text;
   }
 }
 
@@ -43,4 +47,6 @@
 .mainmenu-title {
   margin-left: 10px;
   font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import MainMenu from './components/mainmenu/mainmenu';
-import MainHeader from './components/mainheader/mainheader';
+import MainMenu from 'components/mainmenu/mainmenu';
 import { connect } from 'react-redux';
 import { retrieveSiteSettings } from 'actions/sitesettings';
 
@@ -16,7 +15,6 @@ class App  extends React.Component {
       this.props.settings? (
         <div>
           <MainMenu />
-          <MainHeader />
           <div className='content'>
             { this.props.children }
           </div>

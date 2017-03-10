@@ -4,6 +4,7 @@ import CreatePostModal from '../createpostmodal/createpostmodal';
 import Hamburger from 'components/hamburger/hamburger';
 import { Link } from 'react-router'
 import { connect } from 'react-redux';
+import { getCurrentUser, logOutUser } from 'actions/user';
 
 import './mainmenu.scss';
 
@@ -19,6 +20,8 @@ class MainMenu  extends React.Component {
       createPostModalOpen: false,
       hamburgerMenuOpen: false
     };
+
+    this.props.dispatch(getCurrentUser());
   }
 
   openProfileModal(e) {
@@ -55,6 +58,10 @@ class MainMenu  extends React.Component {
     e.stopPropagation();
   }
 
+  logOutUser() {
+    this.props.dispatch(logOutUser());
+  }
+
   render() {
     return (
       <div className='mainmenu noselect'>
@@ -65,27 +72,35 @@ class MainMenu  extends React.Component {
         <div className='item item-right' onClick={this.toggleHamburgerMenu.bind(this)}>
           <Hamburger open={this.state.hamburgerMenuOpen}>
             <div onClick={this.stopPropagation}>
-              <div className='item-submenu'>
-                <div className='item-submenu-title' onClick={this.openProfileModal.bind(this)}>Login</div>
-                <ProfileModal
-                  open={this.state.profileModalOpen}
-                  onCloseClick={this.closeProfileModal.bind(this)}/>
-              </div>
-              <div className='item-submenu'>
-                <div className='item-submenu-title' onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
-                <CreatePostModal
-                  open={this.state.createPostModalOpen}
-                  onCloseClick={this.closeCreatePostModal.bind(this)}/>
-              </div>
+              { this.props.user.data === null ?
+                <div className='item-submenu'>
+                  <div className='item-submenu-title' onClick={this.openProfileModal.bind(this)}>Login</div>
+                </div>
+                  :
+                <div>
+                  <div className='item-submenu'>
+                    <div className='item-submenu-title' onClick={this.logOutUser.bind(this)}>Logout</div>
+                  </div>
+                  <div className='item-submenu'>
+                    <div className='item-submenu-title' onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
+                  </div>
+                </div>
+              }
             </div>
           </Hamburger>
         </div>
+        <ProfileModal
+          open={this.state.profileModalOpen}
+          onCloseClick={this.closeProfileModal.bind(this)}/>
+        <CreatePostModal
+          open={this.state.createPostModalOpen}
+          onCloseClick={this.closeCreatePostModal.bind(this)}/>
       </div>
     );
   }
 }
 
 MainMenu = connect(
-  (state) => { return { settings: state.siteSettings }}
+  (state) => { return { settings: state.siteSettings, user: state.currentUser }}
 )(MainMenu);
 export default MainMenu;

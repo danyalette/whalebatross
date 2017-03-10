@@ -1,5 +1,5 @@
 import {
-  RECEIVE_USER, REQUEST_LOGIN
+  RECEIVE_USER, REQUEST_LOGIN, REQUEST_CURRENT_USER
 } from 'actions/user'
 
 function user(state = {
@@ -7,6 +7,11 @@ function user(state = {
 }, action) {
   switch (action.type) {
     case REQUEST_LOGIN:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case REQUEST_CURRENT_USER:
       return {
         ...state,
         isFetching: true
@@ -25,6 +30,7 @@ function user(state = {
 export function currentUser(state = { }, action) {
   switch (action.type) {
     case REQUEST_LOGIN:
+    case REQUEST_CURRENT_USER:
     case RECEIVE_USER:
       return {
         ...state,

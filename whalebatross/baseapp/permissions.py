@@ -20,3 +20,7 @@ class IstaffOrNoMod(permissions.BasePermission):
         if (request.method not in SAFE_METHODS):
             return request.user.is_staff
         return True
+
+class AllowAny(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return True

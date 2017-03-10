@@ -31,6 +31,7 @@ class SettingsViewSet(viewsets.ModelViewSet):
 
 class AuthView(views.APIView):
     authentication_classes = (authentication.QuietBasicAuthentication,)
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request, *args, **kwargs):
         login(request, request.user)

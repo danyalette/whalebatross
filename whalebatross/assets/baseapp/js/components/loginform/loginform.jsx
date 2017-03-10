@@ -14,6 +14,10 @@ class LoginForm  extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.timeout) clearTimeout(this.timeout);
+  }
+
   onFieldChange() {
     this.resetFormState();
   }
@@ -29,7 +33,7 @@ class LoginForm  extends React.Component {
     self.setState({
       formState: state
     });
-    setTimeout(function(){
+    this.timeout = setTimeout(function(){
       self.resetFormState();
     }, 2000);
   }
@@ -38,7 +42,7 @@ class LoginForm  extends React.Component {
     var self = this;
     e.preventDefault();
     self.props.dispatch(logInUser(
-      e.target.elements['email'].value,
+      e.target.elements['username'].value,
       e.target.elements['password'].value
     ))
       .then(() => {
@@ -54,14 +58,14 @@ class LoginForm  extends React.Component {
   render() {
     return (
       <div className='loginform'>
-        <form onSubmit={this.handleFormSubmit.bind(this)}>
+        <form autoComplete='on' onSubmit={this.handleFormSubmit.bind(this)} action='/' method='post'>
           <Message status='success' active={this.state.formState == 'success'}>Login Successful.</Message>
           <Message status='fail' active={this.state.formState == 'fail'}>Login Failed.</Message>
           <div className='form-row'>
-            <input name='email' type='text' placeholder='email' onChange={this.onFieldChange.bind(this)}/>
+            <input autoComplete='username' name='username' type='text' placeholder='username' onChange={this.onFieldChange.bind(this)}/>
           </div>
           <div className='form-row'>
-            <input name='password' type='password' placeholder='password' onChange={this.onFieldChange.bind(this)}/>
+            <input autoComplete='password' name='password' type='password' placeholder='password' onChange={this.onFieldChange.bind(this)}/>
           </div>
           <div className='form-row'>
             <input name='submit' type='submit' value='submit' />

@@ -16,11 +16,11 @@ export function apiAuth(username, password) {
   );
 }
 
-export function apiLogout(username, password) {
+export function apiLogout() {
   return http('DELETE', 'auth/', null, true);
 }
 
-export function fetchCurrentUser(username, password) {
+export function fetchCurrentUser() {
   return http('GET', 'user/current/', null, true);
 }
 

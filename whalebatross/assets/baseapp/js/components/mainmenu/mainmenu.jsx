@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileModal from '../profilemodal/profilemodal';
+import LoginModal from '../loginmodal/loginmodal';
 import CreatePostModal from '../createpostmodal/createpostmodal';
 import Hamburger from 'components/hamburger/hamburger';
 import { Link } from 'react-router'
@@ -16,7 +16,7 @@ class MainMenu  extends React.Component {
     var self = this;
 
     this.state = {
-      profileModalOpen: false,
+      loginModalOpen: false,
       createPostModalOpen: false,
       hamburgerMenuOpen: false
     };
@@ -24,15 +24,15 @@ class MainMenu  extends React.Component {
     this.props.dispatch(getCurrentUser());
   }
 
-  openProfileModal(e) {
+  openLoginModal(e) {
     this.setState({
-      profileModalOpen: true
+      loginModalOpen: true
     })
   }
 
-  closeProfileModal() {
+  closeLoginModal() {
     this.setState({
-      profileModalOpen: false
+      loginModalOpen: false
     })
   }
 
@@ -74,7 +74,7 @@ class MainMenu  extends React.Component {
             <div onClick={this.stopPropagation}>
               { this.props.user.data === null ?
                 <div className='item-submenu'>
-                  <div className='item-submenu-title' onClick={this.openProfileModal.bind(this)}>Login</div>
+                  <div className='item-submenu-title' onClick={this.openLoginModal.bind(this)}>Login</div>
                 </div>
                   :
                 <div>
@@ -89,9 +89,9 @@ class MainMenu  extends React.Component {
             </div>
           </Hamburger>
         </div>
-        <ProfileModal
-          open={this.state.profileModalOpen}
-          onCloseClick={this.closeProfileModal.bind(this)}/>
+        <LoginModal
+          open={this.state.loginModalOpen}
+          onCloseClick={this.closeLoginModal.bind(this)}/>
         <CreatePostModal
           open={this.state.createPostModalOpen}
           onCloseClick={this.closeCreatePostModal.bind(this)}/>

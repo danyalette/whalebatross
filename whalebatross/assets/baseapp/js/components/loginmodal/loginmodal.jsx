@@ -1,9 +1,9 @@
 import React from 'react';
 import Modal from '../modal/modal';
 import LoginForm from '../loginform/loginform';
-import './profilemodal.scss';
+import './loginmodal.scss';
 
-export default class ProfileModal  extends React.Component {
+export default class LoginModal  extends React.Component {
 
   constructor(props) {
     super(props);
@@ -17,7 +17,7 @@ export default class ProfileModal  extends React.Component {
 
   render() {
     return (
-      <div className="profilemodal">
+      <div className="loginmodal">
         <Modal
           open={this.props.open}
           onCloseClick={this.closeModal.bind(this)}

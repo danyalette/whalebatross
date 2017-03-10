@@ -8,4 +8,12 @@
   border: 2px solid $dark-text;
   border-radius: 2px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  .postexcerpt-title {
+    font-size: 30px;
+  }
+  .postexcerpt-content {
+    font-size: 17px;
+    font-family: "Lora", serif;
+    line-height: 1.6;
+  }
 }

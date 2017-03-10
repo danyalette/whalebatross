@@ -157,7 +157,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'cleanup_on_startup': True,
     'entity_encoding' : 'raw',
     'custom_undo_redo_levels': 10,
-    'extended_valid_elements' : 'a[class|name|href|target|title|onclick|rel],script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],$elements',
+    'valid_elements' : '*[*]',
     'relative_urls': False
 }
 TINYMCE_SPELLCHECKER = True

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createPost } from 'actions/posts';
 import Message from 'components/message/message';
-import TextEditor from 'text-editor';
+import TextEditor from 'components/texteditor/texteditor';
 import './createpostform.scss';
 
 class CreatePostForm  extends React.Component {
@@ -11,7 +11,8 @@ class CreatePostForm  extends React.Component {
     super(props);
 
     this.state = {
-      formState: null
+      formState: null,
+      bodyHtml: '<p><br></p>'
     }
   }
 
@@ -41,7 +42,7 @@ class CreatePostForm  extends React.Component {
     self.props.dispatch(createPost({
       title: this.formTitleInput.value,
       slug: this.formSlugInput.value,
-      body: this.getBodyHtml()
+      body: this.state.bodyHtml
     }))
       .then(() => {
         self.setFormState('success');
@@ -51,11 +52,11 @@ class CreatePostForm  extends React.Component {
       })
   }
 
-  getBodyHtml() {
-    return this.formBodyInput.state.value.toString('html');
+  handleBodyEditorChange(value) {
+    this.setState({
+      bodyHtml: value
+    });
   }
-
-  readFormData() {}
 
   render() {
     return (
@@ -82,7 +83,8 @@ class CreatePostForm  extends React.Component {
           <div className='form-row'>
             <TextEditor
               className='texteditor'
-              ref={(input) => { this.formBodyInput = input; }}/>
+              onChange={ this.handleBodyEditorChange.bind(this) }
+              value={ this.state.bodyHtml }/>
           </div>
           <div className='form-row'>
             <input name='submit' type='submit' value='submit' />

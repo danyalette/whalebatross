@@ -1,0 +1,30 @@
+.texteditor {
+  width: 100%;
+}
+
+.texteditor [contenteditable] {
+  overflow: auto;
+  max-width: 100%;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid black;
+  outline: none;
+}
+
+.texteditor .hide {
+  display: none;
+}
+
+.texteditor .button-row {
+  margin-bottom: 15px;
+}
+
+.texteditor .button-row button:not(:last-child) {
+  border-right: 0;
+}
+
+.texteditor .button-row button.selected {
+  cursor: default;
+  color: #999999;
+  background: #efefef;
+}

@@ -66,13 +66,13 @@ class MainMenu  extends React.Component {
           <Hamburger open={this.state.hamburgerMenuOpen}>
             <div onClick={this.stopPropagation}>
               <div className='item-submenu'>
-                <div onClick={this.openProfileModal.bind(this)}>Login</div>
+                <div className='item-submenu-title' onClick={this.openProfileModal.bind(this)}>Login</div>
                 <ProfileModal
                   open={this.state.profileModalOpen}
                   onCloseClick={this.closeProfileModal.bind(this)}/>
               </div>
               <div className='item-submenu'>
-                <div onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
+                <div className='item-submenu-title' onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
                 <CreatePostModal
                   open={this.state.createPostModalOpen}
                   onCloseClick={this.closeCreatePostModal.bind(this)}/>

@@ -56,7 +56,7 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         if not getattr(self, 'excerpt'):
-            s = re.compile('<!-- more -->.*', re.DOTALL)
+            s = re.compile('<!-- ?more ?-->.*', re.DOTALL)
             self.excerpt = re.sub(s, '', self.body)
         super(Post, self).save(*args, **kwargs)
 

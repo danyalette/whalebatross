@@ -1,0 +1,29 @@
+.notfound {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  h1 {
+    margin: 0;
+    font-size: 80px;
+    text-transform: uppercase;
+  }
+
+  p {
+    max-width: 700px;
+    margin: 5px 0;
+    font-size: 22px;
+    font-family: "Lora", serif;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}

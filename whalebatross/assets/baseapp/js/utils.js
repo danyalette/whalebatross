@@ -11,17 +11,17 @@ export function apiPut(url, data) {
 }
 
 export function apiAuth(username, password) {
-  return http('POST', 'auth/', null, true,
+  return http('POST', '/auth/', null, true,
     "Basic " + btoa(username + ":" + password)
   );
 }
 
 export function apiLogout() {
-  return http('DELETE', 'auth/', null, true);
+  return http('DELETE', '/auth/', null, true);
 }
 
 export function fetchCurrentUser() {
-  return http('GET', 'user/current/', null, true);
+  return http('GET', '/user/current/', null, true);
 }
 
 function http(type, url, data, includeToken = true, authHeader) {

@@ -11,7 +11,10 @@ class Post extends React.Component {
     super(props);
 
     var self = this;
-    this.props.dispatch(getPost(this.props.params.slug));
+    this.props.dispatch(getPost(this.props.params.slug))
+      // we want django to send http response 404.
+      // if DEBUG == False, the route '/404/' does not exist
+      .catch(() => window.location.href = '/404/')
   }
 
   render(){

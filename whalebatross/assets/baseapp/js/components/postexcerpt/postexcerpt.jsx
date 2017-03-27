@@ -1,16 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import PostMeta from 'components/postmeta/postmeta';
 
 import './postexcerpt.scss';
 
 export default class PostExcerpt extends React.Component {
+
   render(){
-    var post = this.props.post
+    var post = this.props.post;
+
     return (<Link to={`/posts/${post.slug}`}>
       <div className='postexcerpt'>
         <h2 className='postexcerpt-title' > { post.title } </h2>
-        <div><i> { post.author? post.author.username : '' } </i></div>
-        <p className='postexcerpt-content' dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
+        <PostMeta post={post} />
+        <div className='postexcerpt-content'>
+          <p dangerouslySetInnerHTML={{__html: post.excerpt}}></p>
+        </div>
       </div>
     </Link>);
   }

@@ -2,16 +2,52 @@
 
 .post {
   padding: 40px 0;
+
+  h1 {
+    padding-bottom: 10px;
+    font-size: 42px;
+    border-bottom: 2px solid $dark-text;
+  }
+
+  p {
+    font-size: 19px;
+    font-family: "Lora", serif;
+    line-height: 1.6;
+  }
+
+  .post-title {
+    margin-bottom: 20px;
+  }
 }
 
-.post h2 {
-  padding-bottom: 10px;
-  font-size: 42px;
-  border-bottom: 2px solid $dark-text;
-}
+.post,
+.postexcerpt {
+  h2,
+  h3,
+  h4,
+  h5 {
+    text-decoration: underline;
+  }
 
-.post p {
-  font-size: 19px;
-  font-family: "Lora", serif;
-  line-height: 1.6;
+  iframe,
+  pre {
+    overflow: auto;
+    width: 100%;
+    margin: 15px auto;
+    border: 1px solid black;
+  }
+
+  pre {
+    padding: 20px;
+    font-size: 15px;
+    background-color: #efefef;
+  }
+
+  code {
+    padding: 0 5px;
+    margin: 0 5px;
+    font-size: 16px;
+    color: #ffffff;
+    background: #999999;
+  }
 }

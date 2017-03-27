@@ -1,0 +1,24 @@
+.postmeta {
+  padding: 10px;
+  font-size: 14px;
+  background: #eeeeee;
+
+  .postmeta-item {
+    display: inline-block;
+
+    &:after {
+      display: inline-block;
+      padding: 0 10px;
+      content: "\2022";
+      text-decoration: none;
+    }
+
+    &:last-child {
+      border-right: 0;
+
+      &:after {
+        content: "";
+      }
+    }
+  }
+}

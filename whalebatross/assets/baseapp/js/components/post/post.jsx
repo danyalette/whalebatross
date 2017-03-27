@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getPost } from 'actions/posts';
+import PostMeta from 'components/postmeta/postmeta';
 
 import './post.scss';
 
@@ -16,8 +17,8 @@ class Post extends React.Component {
   render(){
     var post = this.props.posts[this.props.params.slug];
     return post? (<div className='post' key={ post.slug }>
-      <h2> { post.title } </h2>
-      <div><i> { post.author? post.author.username : '' } </i></div>
+      <h1 className='post-title'> { post.title } </h1>
+      <PostMeta post={post} />
       <p className='post-content' dangerouslySetInnerHTML={{__html: post.body}}></p>
     </div>): null;
   }

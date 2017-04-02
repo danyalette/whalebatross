@@ -7,8 +7,11 @@
   }
   .navigate {
     display: inline-block;
-    padding: 10px;
-    border: 1px solid $light-border;
+    padding-bottom: 10px;
+    margin: 0 20px;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 2px solid $dark-text;
     &:nth-child(2) {
       margin-left: 10px;
     }

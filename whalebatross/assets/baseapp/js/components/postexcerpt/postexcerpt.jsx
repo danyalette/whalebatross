@@ -11,6 +11,12 @@ export default class PostExcerpt extends React.Component {
 
     return (<Link to={`/posts/${post.slug}`}>
       <div className='postexcerpt'>
+        { post.image
+          ? <div className='postexcerpt-image-wrap'><img
+              className='postexcerpt-image'
+              src={ post.image } /></div>
+          : ''
+        }
         <h2 className='postexcerpt-title' > { post.title } </h2>
         <PostMeta post={post} />
         <div className='postexcerpt-content'>

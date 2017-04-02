@@ -16,17 +16,15 @@
 
 .mainmenu .item-submenu {
   padding: 15px;
+  cursor: pointer;
   border-bottom: 2px solid $dark-text;
   border-left: 2px solid $dark-text;
-  cursor: initial;
   &:first-child {
     border-top: 2px solid $dark-text;
   }
   .item-submenu-title {
     font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
+    font-size: 18px;
   }
 }
 

@@ -26,7 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = models.Post
-        fields = ('url', 'title', 'slug', 'author', 'body', 'excerpt', 'status', 'allow_comments', 'categories', 'publish', 'created', 'modified')
+        fields = ('url', 'title', 'slug', 'author', 'body', 'excerpt', 'status', 'allow_comments', 'categories', 'publish', 'created', 'modified', 'image')
         partial = True
 
 class CategorySerializer(serializers.ModelSerializer):

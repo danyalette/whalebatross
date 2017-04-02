@@ -24,11 +24,11 @@ class PostFeed extends React.Component {
         {postsData.results.map((post) => <PostExcerpt key={ post.slug } post={ post }/>)}
         <div className='navigation'>
           { (postsData.previous)?
-            <Link className='navigate previous' to={ '/page/' + (parseInt(this.props.page) - 1) }> Previous Page </Link>
+            <Link className='navigate previous' to={ '/page/' + (parseInt(this.props.page) - 1) }>&lt; Previous Page </Link>
             : null
           }
           { (postsData.next)?
-            <Link className='navigate next' to={ '/page/' + (parseInt(this.props.page) + 1) }> Next Page </Link>
+            <Link className='navigate next' to={ '/page/' + (parseInt(this.props.page) + 1) }> Next Page &gt;</Link>
             : null
           }
         </div>

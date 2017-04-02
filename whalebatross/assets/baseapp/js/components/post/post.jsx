@@ -19,11 +19,18 @@ class Post extends React.Component {
 
   render(){
     var post = this.props.posts[this.props.params.slug];
-    return post? (<div className='post' key={ post.slug }>
-      <h1 className='post-title'> { post.title } </h1>
-      <PostMeta post={post} />
-      <p className='post-content' dangerouslySetInnerHTML={{__html: post.body}}></p>
-    </div>): null;
+    return post? (
+      <div className='post' key={ post.slug }>
+        <h1 className='post-title'> { post.title } </h1>
+        <PostMeta post={post} />
+        { post.image
+          ? <div className='post-image-wrap'><img
+              className='post-image'
+              src={ post.image } /></div>
+          : ''
+        }
+        <p className='post-content' dangerouslySetInnerHTML={{__html: post.body}}></p>
+      </div>): null;
   }
 }
 

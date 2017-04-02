@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from 'utils';
+import { apiGet, apiPost, apiPostForm } from 'utils';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const RECEIVE_POST = 'RECEIVE_POST';
@@ -34,9 +34,9 @@ export function getPost(slug) {
 
 export function createPost(post) {
   return dispatch => {
-    return apiPost('/api/posts/', post)
+    return apiPostForm('/api/posts/', post)
       .then(data => {
-        dispatch(receivePost(post.slug, data))
+        dispatch(receivePost(data.slug, data))
       })
   }
 }

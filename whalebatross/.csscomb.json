@@ -54,6 +54,7 @@
         "zoom",
         "visibility",
         "box-sizing",
+        "object-fit",
         "width",
         "min-width",
         "max-width",

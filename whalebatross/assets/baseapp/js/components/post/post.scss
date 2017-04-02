@@ -50,4 +50,15 @@
     color: #ffffff;
     background: #999999;
   }
+
+  .post-image-wrap {
+    text-align: center;
+  }
+
+  .post-image {
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+    margin: 25px auto 0 auto;
+  }
 }

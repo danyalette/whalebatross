@@ -73,16 +73,16 @@ class MainMenu  extends React.Component {
           <Hamburger open={this.state.hamburgerMenuOpen}>
             <div onClick={this.stopPropagation}>
               { this.props.user.data === null ?
-                <div className='item-submenu'>
-                  <div className='item-submenu-title' onClick={this.openLoginModal.bind(this)}>Login</div>
+                <div className='item-submenu' onClick={this.openLoginModal.bind(this)}>
+                  <div className='item-submenu-title'>Login</div>
                 </div>
                   :
                 <div>
-                  <div className='item-submenu'>
-                    <div className='item-submenu-title' onClick={this.logOutUser.bind(this)}>Logout</div>
+                  <div className='item-submenu' onClick={this.logOutUser.bind(this)}>
+                    <div className='item-submenu-title'>Logout</div>
                   </div>
-                  <div className='item-submenu'>
-                    <div className='item-submenu-title' onClick={this.openCreatePostModal.bind(this)}>Create Post</div>
+                  <div className='item-submenu' onClick={this.openCreatePostModal.bind(this)}>
+                    <div className='item-submenu-title'>Create Post</div>
                   </div>
                 </div>
               }

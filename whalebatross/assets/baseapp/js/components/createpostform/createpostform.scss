@@ -1,9 +1,43 @@
-.createpostform .texteditor {
-  width: 100%;
-  margin: 20px 0;
-  border-color: #cccccc;
-  border-radius: 1px;
-  [contenteditable] {
-    height: 200px;
+.createpostform {
+  .texteditor {
+    width: 100%;
+    margin-bottom: 20px;
+    border-color: #cccccc;
+    border-radius: 1px;
+
+    [contenteditable] {
+      height: 200px;
+    }
+  }
+
+  h4 {
+    text-decoration: underline;
+  }
+
+  .fileinput-preview {
+    margin-bottom: 20px;
+    font-size: 12px;
+
+    img {
+      max-width: 200px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .fileinput-wrap {
+    position: relative;
+    display: inline-block;
+
+    > * {
+      cursor: pointer;
+    }
+  }
+
+  #fileinput {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    opacity: 0;
   }
 }

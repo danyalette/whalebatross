@@ -1,47 +1,63 @@
+import $ from '@rtorr/ajax-only';
+
 export function apiGet(url) {
-  return http('GET', url, null, false);
+  return httpWithoutCSRF('GET', url);
 }
 
 export function apiPost(url, data) {
-  return http('POST', url, data, true);
+  return httpWithCSRF('POST', url, data);
+}
+
+export function apiPostForm(url, data) {
+  return httpWithCSRF('POST', url, data, null, false);
 }
 
 export function apiPut(url, data) {
-  return http('PATCH', url, data, true);
+  return httpWithCSRF('PATCH', url, data);
 }
 
 export function apiAuth(username, password) {
-  return http('POST', '/auth/', null, true,
-    "Basic " + btoa(username + ":" + password)
+  return httpWithCSRF('POST', '/auth/', null,
+    'Basic ' + btoa(username + ':' + password)
   );
 }
 
 export function apiLogout() {
-  return http('DELETE', '/auth/', null, true);
+  return httpWithoutCSRF('DELETE', '/auth/');
 }
 
 export function fetchCurrentUser() {
-  return http('GET', '/user/current/', null, true);
+  return httpWithoutCSRF('GET', '/user/current/');
 }
 
-function http(type, url, data, includeToken = true, authHeader) {
-  var data = JSON.stringify(data);
+function httpWithCSRF(type, url, data, auth, contentType) {
+  return http(type, url, data, true, auth, contentType);
+}
+
+function httpWithoutCSRF(type, url, data, auth, contentType) {
+  return http(type, url, data, false, auth, contentType);
+}
+
+function http(type, url, data, includeToken = true, authHeader, contentType = 'application/json') {
   return new Promise(function(resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.open(type, url, true);
-    xhr.setRequestHeader('Content-type', 'application/json');
-    if (includeToken) xhr.setRequestHeader('X-CSRFToken', document.querySelector('input[name=csrfmiddlewaretoken]').value);
-    if (authHeader) xhr.setRequestHeader("Authorization", authHeader);
-    xhr.onreadystatechange = function (e) {
-        if (xhr.readyState === 4) {
-            if ([200, 201].includes(xhr.status)) {
-              if (xhr.responseText) resolve(JSON.parse(xhr.responseText))
-              else resolve();
-            } else {
-               reject(xhr.statusText);
-            }
+    $.ajax({
+        url: url,
+        data: data,
+        processData: false,
+        contentType: contentType,
+        type: type,
+        beforeSend: function(request) {
+          if (contentType)
+            request.setRequestHeader('Content-type', contentType);
+          if (includeToken)
+            request.setRequestHeader('X-CSRFToken', document.querySelector('input[name=csrfmiddlewaretoken]').value);
+          if (authHeader)
+            request.setRequestHeader('Authorization', authHeader);
         }
-    };
-    xhr.send(data);
+      }).then(function(response){
+        resolve(response);
+      }).fail(function(message){
+        reject(message);
+      })
   });
 }

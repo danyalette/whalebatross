@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-import datetime
+
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import permalink
 from django.contrib.auth.models import User
@@ -7,9 +7,11 @@ from django.conf import settings
 from django.db import models
 from tinymce.models import HTMLField
 from django.utils import timezone
+from django.utils.text import slugify
 import re
 
-# Create your models here.
+def getNow():
+    return timezone.localtime(timezone.now())
 
 class Category(models.Model):
     """Category model."""
@@ -33,17 +35,18 @@ class Post(models.Model):
         (2, _('Public')),
     )
     title = models.CharField(_('title'), max_length=200)
-    slug = models.SlugField(_('slug'), unique=True)
+    slug = models.SlugField(_('slug'), unique=True, default=None, null=True, blank=True)
     author = models.ForeignKey(User, blank=True, null=True)
     body = HTMLField(_('body'), blank=True)
     excerpt = models.TextField(_('excerpt'), blank=True, help_text=_('Concise text suggested.'))
     status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=2)
     allow_comments = models.BooleanField(_('allow comments'), default=True)
-    publish = models.DateTimeField(_('publish'), default=lambda: timezone.localtime(timezone.now()))
+    publish = models.DateTimeField(_('publish'), default=getNow)
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
     categories = models.ManyToManyField(Category, blank=True)
-
+    image = models.ImageField(upload_to='featured_images/%Y/%m/%d/', max_length=255, null=True, blank=True)
+    
     class Meta:
         verbose_name = _('post')
         verbose_name_plural = _('posts')
@@ -58,6 +61,11 @@ class Post(models.Model):
         if not getattr(self, 'excerpt'):
             s = re.compile('<!-- ?more ?-->.*', re.DOTALL)
             self.excerpt = re.sub(s, '', self.body)
+        # set slug
+        if not getattr(self, 'slug'):
+            self.slug = slugify(self.title)
+        else:
+            self.slug = slugify(self.slug)
         super(Post, self).save(*args, **kwargs)
 
 class SingletonModel(models.Model):

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router'
 
 import './postmeta.scss';
 
@@ -18,6 +19,17 @@ export default class PostMeta extends React.Component {
     return (<div className='postmeta'>
               <span className='postmeta-item'> { date? date : ''} </span>
               <i className='postmeta-item'> { post.author? post.author.username : '' } </i>
+                { post.categories.length ?
+                    <span className='postmeta-item postmeta-item-tags'>
+                      {
+                        post.categories.map((category) =>
+                          (<Link key={ category.slug } to={'/categories/' + category.slug}>
+                            { category.title }
+                          </Link>)
+                        )
+                      }
+                    </span> : ''
+                  }
             </div>);
   }
 }

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets, views, status
+from rest_framework import viewsets, views, status, pagination
 from django.middleware import csrf
 from django.contrib.auth import login, logout
 
@@ -12,6 +12,9 @@ def index(request):
         {'site_settings': serializers.SiteSettingsSerializer(models.SiteSettings.objects.get()).data }
     )
 
+class LargePagination(pagination.PageNumberPagination):
+    page_size = 1000
+
 class PostsViewSet(viewsets.ModelViewSet):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
@@ -22,6 +25,7 @@ class CategoriesViewSet(viewsets.ModelViewSet):
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
     lookup_field = 'slug'
+    pagination_class = LargePagination
     permission_classes = [permissions.IstaffOrNoMod]
 
 class SettingsViewSet(viewsets.ModelViewSet):

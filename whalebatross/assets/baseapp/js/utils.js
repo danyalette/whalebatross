@@ -27,7 +27,7 @@ export function apiLogout() {
 }
 
 export function fetchCurrentUser() {
-  return httpWithoutCSRF('GET', '/user/current/');
+  return httpWithoutCSRF('GET', '/api/user/current/');
 }
 
 function httpWithCSRF(type, url, data, auth, contentType) {

@@ -22,4 +22,15 @@
       }
     }
   }
+
+  .postmeta-item-tags a {
+    &:after {
+      content: ",  ";
+      text-decoration: none;
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+  }
 }

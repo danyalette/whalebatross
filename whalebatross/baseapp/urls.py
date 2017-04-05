@@ -12,12 +12,12 @@ router.register(r'settings', views.SettingsViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
+    url(r'^api/user/current/$',
+        views.CurrentUserView.as_view(),
+        name='current_user'),
     url(r'^auth/$',
         views.AuthView.as_view(),
         name='authenticate'),
-    url(r'^user/current/$',
-        views.CurrentUserView.as_view(),
-        name='current_user'),
     url(r'^$', views.index),
     url(r'^posts/', views.index),
     url(r'^page/', views.index)
@@ -29,4 +29,4 @@ if settings.DEBUG:
     # for urls not starting with 'api',
     # if the url doesn't match any of the other routes,
     # render react app rather than 404
-    urlpatterns.append(url(r'^(?!api).+', views.index))
+    urlpatterns.append(url(r'^(?!api)(?!admin).+', views.index))

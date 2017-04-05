@@ -27,7 +27,7 @@ export function getPosts(page) {
 
 export function getPost(slug) {
   return dispatch => {
-    return apiGet('/api/posts/' + slug)
+    return apiGet('/api/posts/' + slug + '/')
       .then(data => dispatch(receivePost(data)))
   }
 }

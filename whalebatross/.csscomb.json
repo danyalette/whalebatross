@@ -53,6 +53,7 @@
         "clip",
         "zoom",
         "visibility",
+        "appearance",
         "box-sizing",
         "object-fit",
         "width",

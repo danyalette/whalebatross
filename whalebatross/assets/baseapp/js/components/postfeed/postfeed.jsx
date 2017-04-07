@@ -1,8 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getPosts, createPost, getPost } from 'actions/posts';
-import PostExcerpt from '../postexcerpt/postexcerpt';
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
+import { getPosts } from 'actions/posts';
+import PostExcerpt from '../postexcerpt/postexcerpt';
+
 import './postfeed.scss';
 
 class PostFeed extends React.Component {
@@ -10,7 +11,7 @@ class PostFeed extends React.Component {
   constructor(props) {
     super(props);
     this.page = this.props.page;
-    this.props.dispatch(getPosts(this.props.page))
+    this.props.dispatch(getPosts(this.props.page));
   }
 
   render() {

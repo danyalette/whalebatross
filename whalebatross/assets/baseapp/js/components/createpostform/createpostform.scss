@@ -1,4 +1,36 @@
+@import "../../styles/variables/variables";
+
 .createpostform {
+  .inputs-categories {
+    input[type=checkbox] {
+      display: inline-block;
+      overflow: hidden;
+      appearance: none;
+      width: 0;
+      height: 0;
+      margin: 0;
+      opacity: 0.01;
+    }
+
+    input[type=checkbox] + label {
+      &:before {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+        content: "";
+        background: none;
+        border: 1px solid $dark-text;
+      }
+    }
+
+    input[type=checkbox]:checked + label {
+      &:before {
+        background: #555555;
+      }
+    }
+  }
+
   .texteditor {
     width: 100%;
     margin-bottom: 20px;

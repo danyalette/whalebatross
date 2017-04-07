@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createPost } from 'actions/posts';
+import { getCategories } from 'actions/categories';
 import Message from 'components/message/message';
 import TextEditor from 'components/texteditor/texteditor';
 import './createpostform.scss';
@@ -13,8 +14,10 @@ class CreatePostForm  extends React.Component {
     this.state = {
       formState: null,
       bodyHtml: '<p><br></p>',
-      file: null
+      file: null,
+      categoriesSelection: {}
     }
+    this.props.dispatch(getCategories());
   }
 
   onFieldChange() {
@@ -38,6 +41,19 @@ class CreatePostForm  extends React.Component {
     }
   }
 
+  getCheckboxHandler(slug) {
+    return (e) => this.onCheckboxChange(e, slug)
+  }
+
+  onCheckboxChange(e, slug) {
+    this.setState({
+      categoriesSelection: {
+        ...this.state.categoriesSelection,
+        [slug]: e.target.checked
+      }
+    });
+  }
+
   resetFormState() {
     this.setState({
       formState: null
@@ -57,11 +73,7 @@ class CreatePostForm  extends React.Component {
   handleFormSubmit(e) {
     var self = this;
     e.preventDefault();
-    var formData = new FormData();
-    formData.append('title', this.formTitleInput.value);
-    formData.append('body', this.state.bodyHtml);
-    if (this.formFileInput.files.length) formData.append('image', this.formFileInput.files[0]);
-    self.props.dispatch(createPost(formData))
+    self.props.dispatch(createPost(this.getFormData()))
       .then(() => {
         self.setFormState('success');
       })
@@ -70,10 +82,27 @@ class CreatePostForm  extends React.Component {
       })
   }
 
+  getFormData() {
+    let formData = new FormData();
+    formData.append('title', this.formTitleInput.value);
+    formData.append('body', this.state.bodyHtml);
+    this.props.categories.map((c) => {
+      if (this.state.categoriesSelection[c.slug])
+        formData.append('categories_ids', c.slug)
+    });
+    if (this.formFileInput.files.length)
+      formData.append('image', this.formFileInput.files[0]);
+    return formData;
+  }
+
   handleBodyEditorChange(value) {
     this.setState({
       bodyHtml: value
     });
+  }
+
+  makeCategoryId(slug) {
+    return 'input-category-' + slug;
   }
 
   render() {
@@ -88,6 +117,23 @@ class CreatePostForm  extends React.Component {
               placeholder='My New Post'
               ref={(input) => { this.formTitleInput = input; }}
               onChange={this.onFieldChange.bind(this)}/>
+          </div>
+          <div className='form-row inputs-categories'>
+            <h4> Categories </h4>
+            { this.props.categories.map((c) => {
+                let id = this.makeCategoryId(c.slug);
+                return (
+                  <div key={ c.slug }>
+                    <input
+                      value={ c.slug }
+                      id={ id }
+                      type='checkbox'
+                      onChange={ this.getCheckboxHandler(c.slug) } />
+                    <label htmlFor={ id }> { c.title } </label>
+                  </div>
+                )
+              })
+            }
           </div>
           <div className='form-row'>
             <h4> Image </h4>
@@ -126,6 +172,8 @@ class CreatePostForm  extends React.Component {
   }
 }
 
-CreatePostForm = connect()(CreatePostForm);
+CreatePostForm = connect(
+  (state) => { return { categories: state.categories } }
+)(CreatePostForm);
 
 export default CreatePostForm;
